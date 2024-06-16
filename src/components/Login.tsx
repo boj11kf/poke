@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as authenticationActions } from "../store/actions/authentication-actions";
 import '../App.css';
 import { useNavigate } from "react-router-dom";
+import { RootState } from "store/reducers/root-reducer";
 
 
 
@@ -12,13 +13,15 @@ const Login = () => {
     const [password, setPassword] = useState<string>('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const isUserLoggedIn = useSelector((state: RootState) => state.authentication.isUserLoggedIn);
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         console.log(username);
         console.log(password);
         dispatch<any>(authenticationActions.thunkLogIn({ 'email': username, 'password': password }));
-        navigate("/catchAndRelease");
+        isUserLoggedIn && navigate("/catchAndRelease");
+
     };
 
     const handleRegistration = (event: React.MouseEvent) => {
