@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux";
+import {actionCreators as authenticationActions} from "../store/actions/authentication-actions";
 
 
 
@@ -6,11 +8,13 @@ const Login = () => {
 
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const dispatch = useDispatch();
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         console.log(username);
         console.log(password);
+        dispatch<any>(authenticationActions.thunkLogIn({'email': username, 'password': password}));
     };
 
     return (

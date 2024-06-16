@@ -1,14 +1,18 @@
-import { services } from "../services/services.tsx";
+import { services } from "../../services/services";
 
 
 const USER_LOG_IN = 'user/user-log-in';
 const USER_LOG_OUT = 'user/user-log-out';
+const USER_REGISTRATION = 'user/registration';
 
 interface UserLogInAction {
     type: typeof USER_LOG_IN;
 }
 interface UserLogOutAction {
     type: typeof USER_LOG_OUT;
+}
+interface UserRegistraionAction {
+    type: typeof USER_REGISTRATION;
 }
 
 export type AuthenticationActions = UserLogInAction | UserLogOutAction;
@@ -18,7 +22,7 @@ export const actionCreators = {
     /***** THUNK ACTIONS *****/
     thunkLogIn: (payload: any) => (async (dispatch: any) => {
         try {
-            const response = await services.postData('http://localhost:8080/login', payload)
+            const response = await services.postData('http://localhost:3000/api/auth/login', payload)
             const text = await response.text();
 
             localStorage.setItem("token", String(text));
@@ -32,6 +36,18 @@ export const actionCreators = {
         try {
             localStorage.removeItem("token");
 
+            dispatch(actionCreators.logOut());
+
+        } catch (error) {
+            console.error(error);
+        }
+    }),
+    thunkRegistration: (payload: any) => (async (dispatch: any) => {
+        try {
+            const response = await services.postData('http://localhost:3000/api/auth/register', payload)
+            const text = await response.text();
+
+            dispatch(actionCreators.registration());
         } catch (error) {
             console.error(error);
         }
@@ -44,5 +60,8 @@ export const actionCreators = {
     }),
     logOut: (): UserLogOutAction => ({
         type: USER_LOG_OUT,
+    }),
+    registration: (): UserRegistraionAction => ({
+        type: USER_REGISTRATION,
     }),
 }
