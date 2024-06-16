@@ -1,6 +1,7 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux";
-import { actionCreators as authenticationActions} from "../store/actions/authentication-actions";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as authenticationActions } from "../store/actions/authentication-actions";
+import '../App.css';
 
 
 
@@ -14,19 +15,19 @@ const Login = () => {
         event.preventDefault();
         console.log(username);
         console.log(password);
-        dispatch<any>(authenticationActions.thunkLogIn({'email': username, 'password': password}));
+        dispatch<any>(authenticationActions.thunkLogIn({ 'email': username, 'password': password }));
     };
 
     const handleRegistration = (event: React.MouseEvent) => {
         event.preventDefault();
-        dispatch<any>(authenticationActions.thunkRegistration({'username':username, 'email': username, 'password': password}));
+        dispatch<any>(authenticationActions.thunkRegistration({ 'username': username, 'email': username, 'password': password }));
     };
 
     return (
         <>
             <div className="dropdown-menu">
                 <form className="px-4 py-3" onSubmit={handleSubmit}>
-                    <div className="mb-3">
+                    <div className="mb-3 sign-in-input">
                         <label htmlFor="exampleDropdownFormEmail1" className="form-label">Email address</label>
                         <input
                             type="email"
@@ -35,14 +36,14 @@ const Login = () => {
                             placeholder="email@example.com"
                             onChange={(e) => setUsername(e.target.value)} />
                     </div>
-                    <div className="mb-3">
+                    <div className="mb-3 sign-in-input">
                         <label htmlFor="exampleDropdownFormPassword1" className="form-label">Password</label>
                         <input
                             type="password"
                             className="form-control"
                             id="exampleDropdownFormPassword1"
-                            placeholder="Password" 
-                            onChange={(e) => setPassword(e.target.value)}/>
+                            placeholder="Password"
+                            onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <div className="mb-3">
                         <div className="form-check">
