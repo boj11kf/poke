@@ -10,8 +10,7 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
   jwt.verify(token, process.env.JWT_SECRET as string, (err, user) => {
     if (err) return res.sendStatus(403);
 
-    // Extend Express Request object to include user
-    (req as any).user = user; // Cast req as any to avoid TypeScript error
+    (req as any).user = user; 
     next();
   });
 };

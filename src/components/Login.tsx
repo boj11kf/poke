@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux";
-import {actionCreators as authenticationActions} from "../store/actions/authentication-actions";
+import { actionCreators as authenticationActions} from "../store/actions/authentication-actions";
 
 
 
@@ -15,6 +15,11 @@ const Login = () => {
         console.log(username);
         console.log(password);
         dispatch<any>(authenticationActions.thunkLogIn({'email': username, 'password': password}));
+    };
+
+    const handleRegistration = (event: React.MouseEvent) => {
+        event.preventDefault();
+        dispatch<any>(authenticationActions.thunkRegistration({'username':username, 'email': username, 'password': password}));
     };
 
     return (
@@ -53,7 +58,7 @@ const Login = () => {
                     <button type="submit" className="btn btn-primary">Sign in</button>
                 </form>
                 <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="#">New around here? Sign up</a>
+                <a className="dropdown-item" href="#" onClick={handleRegistration}>New around here? Sign up</a>
                 <br />
                 <a className="dropdown-item" href="#">Forgot password?</a>
             </div>

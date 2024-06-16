@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './properties.env' });
 import sequelize from './database';
 import authRoutes from './routes/authRoutes';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use('/api/auth', authRoutes);
