@@ -1,8 +1,6 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+  width: 50%;
 }
 
 .logo {
@@ -43,6 +41,8 @@
 
 body {
   height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 header {
@@ -57,4 +57,14 @@ header {
 
 input {
   margin-left: 10px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropdown-menu {
+  max-width: 350px;
+  margin: auto;
 }

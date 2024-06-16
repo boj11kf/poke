@@ -5,7 +5,7 @@ import { actionCreators as authenticationActions } from "../store/actions/authen
 
 const NavigationBar = () => {
     const location = useLocation();
-    const isLoginPageActive = location.pathname === 'login';
+    const isLoginPageActive = location.pathname === '/login';
     const isUserLoggedIn = useSelector((state: RootState) => state.authentication.isUserLoggedIn);
     const dispatch = useDispatch();
 
@@ -19,8 +19,12 @@ const NavigationBar = () => {
         <nav>
             <Link to={"/"}>@Poke</Link>
             {
-                location.pathname !== "/login" &&
+                (!isUserLoggedIn && !isLoginPageActive) &&
                 <Link to={"/login"}>Log in</Link>
+            }
+            {
+                isUserLoggedIn &&
+                <Link to={"/catchAndRelease"}>CatchAndRelease</Link>
             }
             {
                 (isUserLoggedIn && !isLoginPageActive) &&
