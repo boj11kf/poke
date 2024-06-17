@@ -1,6 +1,10 @@
+
+
 interface ErrorPageProps {
     message: string;
 }
+
+/*  Ha nem routolhato url-t adunk meg, akkor ez jelenik meg */
 const ErrorPage = (props: ErrorPageProps) => {
 
     return (

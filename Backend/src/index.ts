@@ -19,12 +19,12 @@ app.use('/api/auth', authRoutes);
 
 // Test database connection
 sequelize.authenticate()
-.then(() => console.log('PostgreSQL connected'))
-.catch(err => console.error('PostgreSQL connection error:', err));
+    .then(() => console.log('PostgreSQL connected'))
+    .catch(err => console.error('PostgreSQL connection error:', err));
 
 // Start server
 app.listen(port, () => {
-console.log("Server is running at http://localhost:${port}");
+    console.log("Server is running at http://localhost:${port}");
 });
 
 export default app;

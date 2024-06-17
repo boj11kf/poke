@@ -1,7 +1,7 @@
 
 
 
-export const CatchAndRelease = () => {
+const CatchAndRelease = () => {
     
     return (
         <section>
@@ -9,3 +9,5 @@ export const CatchAndRelease = () => {
         </section>
     )
 }
+
+export default CatchAndRelease;
