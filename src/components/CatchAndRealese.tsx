@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card, { Pokemon } from "../components/Card/Card";
-import logo from '../poke-logo.jpeg';
 import './Card/style.css';
-
-/* interface Pokemon {
-  id: number;
-  name: string;
-  url: string;
-  [key: string]: any; // This allows other properties
-} */
 
 interface PokeAPIResponse {
     next: string | null;
@@ -63,12 +55,6 @@ const CatchAndRealese: React.FC = () => {
 
     return (
         <>
-            <nav className="navbar navbar-dark bg-dark">
-                <a className="navbar-brand poke-nav" href="#">
-                    <img src={logo} width="40" height="40" className="d-inline-block align-top" alt="" />&nbsp;
-                    Poke App
-                </a>
-            </nav>
             <div className="container">
                 <Card pokemon={pokeData} loading={loading}></Card>
                 <div className="btn-div">
