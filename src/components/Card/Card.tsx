@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 /* import { RiSearch2Line } from "react-icons/ri"; */
 import './style.css';
+import { Loading } from "../Loading";
 
 export interface Pokemon {
   id: number;
@@ -72,7 +73,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
 
       <div className="grid-container">
         {
-          loading ? <h1>Loading...</h1> :
+          loading ? <Loading/> :
             pokemon.filter((item) => {
               if (searchInput === "") {
                 return item;
