@@ -48,8 +48,10 @@ const CatchAndRealese: React.FC = () => {
             })
         );
 
+        const pokemonsWithoutRepetitiveElement = Array.from(new Set(pokemonData)) as Pokemon[];
+
         setPokeData((state) => {
-            state = [...state, ...pokemonData];
+            state = [...pokemonData];
             state.sort((a, b) => (a.id > b.id ? 1 : -1));
             return state;
         });

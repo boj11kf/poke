@@ -46,6 +46,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
         onHide={handleClose}
         aria-labelledby="contained-modal-title-vcenter"
         centered
+        className="chosen-poke-modal"
       >
         <Modal.Header closeButton>
           <Modal.Title>{pokeName}</Modal.Title>
@@ -69,7 +70,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
         />
       </div>
 
-      <div className="row card-row">
+      <div className="grid-container">
         {
           loading ? <h1>Loading...</h1> :
             pokemon.filter((item) => {
@@ -81,7 +82,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
               return null;
             }).map((item) => {
               return (
-                <div className="col-md-3" key={item.id}>
+                <div className="item" key={item.id}>
                   <div className="card poke-card" onClick={() => openPokeInfo(item)}>
                     <img className="card-img-top card-img" src={item.sprites.front_default} alt="Card" />
                     <div className="card-body">
