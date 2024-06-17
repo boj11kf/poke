@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 /* import { RiSearch2Line } from "react-icons/ri"; */
 import './style.css';
 import { Loading } from "../Loading";
@@ -59,21 +59,18 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
         </Modal.Body>
       </Modal>
 
-      <div className="form-group has-search">
-        <span className="fa fa-search form-control-feedback">
-          {/* <RiSearch2Line className="search-icon" /> */}
-        </span>
+      <form className="form-inline my-2 my-lg-0">
         <input
-          type="text"
-          className="form-control"
-          onChange={event => setSearchInput(event.target.value)}
+          className="form-control mr-sm-2"
+          type="search"
           placeholder="Search"
-        />
-      </div>
-
+          aria-label="Search"
+          onChange={event => setSearchInput(event.target.value)} />
+        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
       <div className="grid-container">
         {
-          loading ? <Loading/> :
+          loading ? <Loading /> :
             pokemon.filter((item) => {
               if (searchInput === "") {
                 return item;
