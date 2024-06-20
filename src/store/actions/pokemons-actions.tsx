@@ -31,7 +31,6 @@ export const actionCreators = {
                 services.getPokemonData(res.data.results).then((res) => {
                     console.log(res);
                     const ascPokemons: Pokemon[] = res.sort((a, b) => (a.id > b.id ? 1 : -1));
-                    console.log(`init redux with ${JSON.stringify(ascPokemons)}`);
                     dispatch(actionCreators.InitPokemons(ascPokemons));
             })});
         } catch (error) {

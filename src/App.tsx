@@ -17,7 +17,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch<any>(pokemonActions.thunkInitPokemons());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
