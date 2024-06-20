@@ -97,3 +97,7 @@
 .modal-header {
     text-align: center;
 }
+
+.is-already-mine {
+    background-color: #01B798;
+}

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 /* import { RiSearch2Line } from "react-icons/ri"; */
 import './style.css';
 import { Loading } from "../Loading";
+import { useDispatch } from "react-redux";
+import { actionCreators as pokemonActions } from "../../store/actions/pokemons-actions";
 
 export interface Pokemon {
   id: number;
@@ -14,15 +16,16 @@ export interface Pokemon {
     front_default: string;
   };
   [key: string]: any;
+  isMine: boolean;
 }
 
 interface CardProps {
-  pokemon: Pokemon[];
+  pokemons: Pokemon[];
   loading: boolean;
 }
 
 const Card: React.FC<CardProps> = (props: CardProps) => {
-  const { pokemon, loading } = props;
+  const { pokemons, loading } = props;
   const [showModal, setShow] = useState<boolean>(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -31,15 +34,28 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
   const [pokeWeight, setPokeWeight] = useState<string>('');
   const [pokeImg, setPokeImg] = useState<string>('');
   const [searchInput, setSearchInput] = useState<string>('');
+  const [currentPokemon, setCurrentPokemon] = useState<Pokemon>({} as Pokemon);
+  const dispatch = useDispatch();
+
 
   const openPokeInfo = (res: Pokemon) => {
     setPokeName(res.name);
     setPokeHeight(res.height.toString());
     setPokeWeight(res.weight.toString());
     setPokeImg(res.sprites.front_default);
+    setCurrentPokemon(res);
     handleShow();
   }
 
+  const handleRelease = () => {
+    dispatch<any>(pokemonActions.thunkRemoveFromMyPokemons(currentPokemon));
+  };
+
+  const handleCatch = () => {
+    dispatch<any>(pokemonActions.thunkAddToMyPokemons(currentPokemon));
+  };
+
+  console.log(pokemons);
   return (
     <>
       <Modal
@@ -47,7 +63,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
         onHide={handleClose}
         aria-labelledby="contained-modal-title-vcenter"
         centered
-        className="chosen-poke-modal"
+        className={`chosen-poke-modal`} 
       >
         <Modal.Header closeButton>
           <Modal.Title>{pokeName}</Modal.Title>
@@ -57,6 +73,10 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
           <p>Height : {pokeHeight}</p>
           <p>Weight : {pokeWeight}</p>
         </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCatch}>Catch</Button>
+          <Button variant="primary" onClick={handleRelease}>Release</Button>
+        </Modal.Footer>
       </Modal>
 
       <form className="form-inline my-2 my-lg-0">
@@ -71,7 +91,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
       <div className="grid-container">
         {
           loading ? <Loading /> :
-            pokemon.filter((item) => {
+            pokemons.filter((item) => {
               if (searchInput === "") {
                 return item;
               } else if (item.name.toLowerCase().includes(searchInput.toLowerCase())) {
@@ -80,7 +100,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
               return null;
             }).map((item) => {
               return (
-                <div className="item" key={item.id}>
+                <div className={`item ${item.isMine && "is-already-mine"}`}  key={item.id}>
                   <div className="card poke-card" onClick={() => openPokeInfo(item)}>
                     <img className="card-img-top card-img" src={item.sprites.front_default} alt="Card" />
                     <div className="card-body">

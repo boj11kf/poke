@@ -32,7 +32,12 @@ const NavigationBar = () => {
             }
             {
                 isUserLoggedIn &&
-                <Link to={"/catchAndRelease"}>CatchAndRelease</Link>
+                (
+                    <>
+                        <Link to={"/catchAndRelease"}>CatchAndRelease</Link>
+                        <Link to={"/myPokemonList"}>MyPokemonList</Link>
+                    </>
+                )
             }
             {
                 (isUserLoggedIn && !isLoginPageActive) &&
