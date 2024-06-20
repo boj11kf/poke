@@ -16,7 +16,7 @@ const CatchAndRealese: React.FC = () => {
 
     useEffect(() => {
         setPokeData(useSelector((state: RootState) => state.pokemonsState?.pokemons) || [] as Pokemon[]);
-    }, [loading]);
+    }, [!loading]);
 
     console.log(pokeData);
 
