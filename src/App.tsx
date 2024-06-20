@@ -14,12 +14,12 @@ import { useDispatch } from 'react-redux';
 
 const App = () => {
 
-  const dispatch = useDispatch();
-  
+  /* const dispatch = useDispatch();
+
 
   useEffect(() => {
     dispatch<any>(pokemonActions.thunkInitPokemons());
-  }, [dispatch]);
+  }, [dispatch]); */
 
 
 

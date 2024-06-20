@@ -15,7 +15,7 @@ import { thunk } from "redux-thunk";
 const store = configureStore({
   reducer: rootReducer,
   devTools: process.env.NODE_ENV !== 'production', // Enable Redux DevTools in development mode
-  middleware: () => new Tuple(thunk, logger),
+  middleware: () => new Tuple(thunk/* , logger */),
 });
 
 /* store.dispatch<any>(pokemonActions.thunkInitPokemons()); */

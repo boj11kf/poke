@@ -40,18 +40,18 @@ export const actionCreators = {
 
     /***** THUNK ACTIONS *****/
     thunkInitPokemons: () => (async (dispatch: any) => {
+        dispatch(actionCreators.StartLoading());
         try {
-            dispatch(actionCreators.StartLoading());
             services.pokeFunc().then((res) => {
-                console.log(res);
                 services.getPokemonData(res.data.results).then((res) => {
                     console.log(res);
                     const ascPokemons: Pokemon[] = res.sort((a, b) => (a.id > b.id ? 1 : -1));
                     dispatch(actionCreators.InitPokemons(ascPokemons));
             })});
-            dispatch(actionCreators.FinishLoading());
         } catch (error) {
             console.log(`error in thunkInitPokemons: ${error}`);
+        } finally {
+            dispatch(actionCreators.FinishLoading());
         }
     }),
     thunkAddToMyPokemons: (payload: Pokemon) => (async (dispatch: any) => {

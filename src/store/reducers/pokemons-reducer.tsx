@@ -45,6 +45,5 @@ export const reducer: Reducer<PokemonsState> = (
             break;
         default: break;
     }
-    console.log(newState);
     return newState;
 }

@@ -7,7 +7,7 @@ import logo from '../poke-logo.jpeg';
 const NavigationBar = () => {
     const location = useLocation();
     const isLoginPageActive = location.pathname === '/login';
-    const isUserLoggedIn = useSelector((state: RootState) => state.authentication.isUserLoggedIn);
+    const isUserLoggedIn = useSelector((state: RootState) => state.authenticationState?.isUserLoggedIn);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
