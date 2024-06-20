@@ -1,5 +1,6 @@
 import { Pokemon } from "components/Card/Card";
-import { services } from "../../services/services";
+import { PokeAPIResponse, services } from "../../services/services";
+import axios from "axios";
 
 
 const INIT_POKOEMONS = 'pokemons/init-pokemons';
@@ -28,13 +29,14 @@ interface FinishLoadingAction {
     type: typeof FINISH_LOADING;
 }
 
+export type PokemonActions
+    = InitPokemonsAction
+    | AddToMyPokemonsAction
+    | RemoveFromMyPokemonsAction
+    | StartLoadingAction
+    | FinishLoadingAction;
 
-export type PokemonActions 
-= InitPokemonsAction 
-| AddToMyPokemonsAction 
-| RemoveFromMyPokemonsAction
-| StartLoadingAction
-| FinishLoadingAction;
+
 
 export const actionCreators = {
 
@@ -42,12 +44,15 @@ export const actionCreators = {
     thunkInitPokemons: () => (async (dispatch: any) => {
         dispatch(actionCreators.StartLoading());
         try {
-            services.pokeFunc().then((res) => {
-                services.getPokemonData(res.data.results).then((res) => {
-                    console.log(res);
-                    const ascPokemons: Pokemon[] = res.sort((a, b) => (a.id > b.id ? 1 : -1));
-                    dispatch(actionCreators.InitPokemons(ascPokemons));
-            })});
+            const res = await axios.get<PokeAPIResponse>('https://pokeapi.co/api/v2/pokemon/');
+            const results = await Promise.all(res.data.results.map(item => axios.get(item.url)));
+
+            const pokemons = results.map(result => result.data).filter((pokemon, index, self) =>
+                index === self.findIndex((p) => p.id === pokemon.id)
+            );
+
+            pokemons.sort((a, b) => a.id > b.id ? 1 : -1);
+            dispatch(actionCreators.InitPokemons(pokemons));
         } catch (error) {
             console.log(`error in thunkInitPokemons: ${error}`);
         } finally {
@@ -79,8 +84,8 @@ export const actionCreators = {
     }),
     StartLoading: (): StartLoadingAction => ({
         type: START_LOADING,
-      }),
-      FinishLoading: (): FinishLoadingAction => ({
+    }),
+    FinishLoading: (): FinishLoadingAction => ({
         type: FINISH_LOADING,
-      }),
+    }),
 }

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Pokemon } from "components/Card/Card";
 
-interface PokeAPIResponse {
+export interface PokeAPIResponse {
     next: string | null;
     previous: string | null;
     results: Pokemon[];
