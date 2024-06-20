@@ -11,11 +11,12 @@ import axios from "axios";
 
 const CatchAndRealese: React.FC = () => {
 
-    //const [pokeData, setPokeData] = useState<Pokemon[]>([]);
-    const pokeData: Pokemon[] = useSelector((state: RootState) => state.pokemonsState?.pokemons) || [] as Pokemon[];
-    const [loading, setLoading] = useState<boolean>(true);
+    const [pokeData, setPokeData] = useState<Pokemon[]>([]);
+    const loading = useSelector((state: RootState) => state.pokemonsState?.isLoading) || false; 
 
-    const dispatch = useDispatch();
+    useEffect(() => {
+        setPokeData(useSelector((state: RootState) => state.pokemonsState?.pokemons) || [] as Pokemon[]);
+    }, [loading]);
 
     console.log(pokeData);
 
