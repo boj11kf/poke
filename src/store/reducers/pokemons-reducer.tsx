@@ -3,19 +3,19 @@ import { PokemonActions } from "../actions/pokemons-actions";
 import { Action, Reducer } from "redux";
 
 
-export interface ProkemonsState {
+export interface PokemonsState {
     pokemons: Pokemon[];
 }
 
-const initialState: ProkemonsState = {
+const initialState: PokemonsState = {
     pokemons: []
 }
 
 type KnownActions = PokemonActions;
 
-export const reducer: Reducer<ProkemonsState> = (
-    state: ProkemonsState = initialState,
-    incomingAction: Action): ProkemonsState => {
+export const reducer: Reducer<PokemonsState> = (
+    state: PokemonsState = initialState,
+    incomingAction: Action): PokemonsState => {
 
     const action = incomingAction as KnownActions;
     let newState = state;
@@ -38,5 +38,6 @@ export const reducer: Reducer<ProkemonsState> = (
             break;
         default: break;
     }
+    console.log(newState);
     return newState;
 }

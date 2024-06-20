@@ -13,7 +13,7 @@ const Login = () => {
     const [password, setPassword] = useState<string>('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const isUserLoggedIn = useSelector((state: RootState) => state.authentication.isUserLoggedIn);
+    const isUserLoggedIn = useSelector((state: RootState) => state.authenticationState.isUserLoggedIn);
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
