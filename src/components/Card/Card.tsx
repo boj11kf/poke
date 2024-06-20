@@ -47,11 +47,13 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
     handleShow();
   }
 
-  const handleRelease = () => {
+  const handleRelease = (event: React.MouseEvent) => {
+    event.preventDefault();
     dispatch<any>(pokemonActions.thunkRemoveFromMyPokemons(currentPokemon));
   };
 
-  const handleCatch = () => {
+  const handleCatch = (event: React.MouseEvent) => {
+    event.preventDefault();
     dispatch<any>(pokemonActions.thunkAddToMyPokemons(currentPokemon));
   };
 
@@ -74,8 +76,8 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
           <p>Weight : {pokeWeight}</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCatch}>Catch</Button>
-          <Button variant="primary" onClick={handleRelease}>Release</Button>
+          <Button variant="secondary" onClick={(e) => handleCatch(e)}>Catch</Button>
+          <Button variant="primary" onClick={(e) => handleRelease(e)}>Release</Button>
         </Modal.Footer>
       </Modal>
 

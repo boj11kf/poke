@@ -20,7 +20,7 @@ const Login = () => {
         console.log(username);
         console.log(password);
         dispatch<any>(authenticationActions.thunkLogIn({ 'email': username, 'password': password }));
-        isUserLoggedIn && navigate("/catchAndRelease");
+        /* isUserLoggedIn &&  */navigate("/catchAndRelease");
 
     };
 

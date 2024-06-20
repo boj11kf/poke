@@ -26,7 +26,6 @@ const CatchAndRealese: React.FC = () => {
     const [pokeData, setPokeData] = useState<Pokemon[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [url, setUrl] = useState<string>("https://pokeapi.co/api/v2/pokemon/");
-    ;
 
 
     const pokeFunc = async () => {
@@ -34,7 +33,7 @@ const CatchAndRealese: React.FC = () => {
 
         getPokemonData(res.data.results);
         setLoading(false);
-    }
+    };
 
     const getPokemonData = async (res: Pokemon[]) => {
         res.map(async (item) => {
@@ -46,12 +45,14 @@ const CatchAndRealese: React.FC = () => {
                 return state;
             });
         })
-    }
+    };
 
 
     useEffect(() => {
         pokeFunc()
-    }, [url])
+    }, [url]);
+
+    console.log(pokeData);
 
     return (
         <>

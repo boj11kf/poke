@@ -22,7 +22,7 @@ export const actionCreators = {
     /***** THUNK ACTIONS *****/
     thunkLogIn: (payload: any) => (async (dispatch: any) => {
         try {
-            const response = await services.postData('http://localhost:3000/api/auth/login', payload)
+            const response = await services.postData('http://localhost:3000/api/auth/login', payload);
             const text = await response.text();
 
             localStorage.setItem("token", String(text));
