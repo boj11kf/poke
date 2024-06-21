@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
 import { Pokemon } from "./Card/Card";
-import { RootState } from "store/reducers/root-reducer";
+import { RootState } from "store/store";
 
 
 
 const MyPokemonList = () => {
     const myPokemons: Pokemon[]
-        = useSelector((state: RootState) => state.pokemonsState.pokemons)
+        = useSelector((state: RootState) => state.pokemons.pokemons)
             .filter(pokemon => pokemon.isMine);
 
     return (

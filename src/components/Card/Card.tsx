@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-/* import { RiSearch2Line } from "react-icons/ri"; */
-import './style.css';
 import { Loading } from "../Loading";
 import { useDispatch } from "react-redux";
 import { actionCreators as pokemonActions } from "../../store/actions/pokemons-actions";
+import { AppDispatch } from "store/store";
+import './style.css';
 
 export interface Pokemon {
   id: number;
@@ -35,9 +35,8 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
   const [pokeImg, setPokeImg] = useState<string>('');
   const [searchInput, setSearchInput] = useState<string>('');
   const [currentPokemon, setCurrentPokemon] = useState<Pokemon>({} as Pokemon);
-  const dispatch = useDispatch();
-
-
+  const dispatch: AppDispatch = useDispatch();
+  
   const openPokeInfo = (res: Pokemon) => {
     setPokeName(res.name);
     setPokeHeight(res.height.toString());
@@ -49,12 +48,12 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
 
   const handleRelease = (event: React.MouseEvent) => {
     event.preventDefault();
-    dispatch<any>(pokemonActions.thunkRemoveFromMyPokemons(currentPokemon));
+    dispatch(pokemonActions.thunkRemoveFromMyPokemons(currentPokemon));
   };
 
   const handleCatch = (event: React.MouseEvent) => {
     event.preventDefault();
-    dispatch<any>(pokemonActions.thunkAddToMyPokemons(currentPokemon));
+    dispatch(pokemonActions.thunkAddToMyPokemons(currentPokemon));
   };
 
   console.log(pokemons);

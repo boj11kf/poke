@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as authenticationActions } from "../store/actions/authentication-actions";
 import '../App.css';
 import { useNavigate } from "react-router-dom";
-import { RootState } from "store/reducers/root-reducer";
+import { RootState, AppDispatch } from "store/store";
 
 
 
@@ -11,22 +11,22 @@ const Login = () => {
 
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const dispatch = useDispatch();
+    const dispatch: AppDispatch = useDispatch();
     const navigate = useNavigate();
-    const isUserLoggedIn = useSelector((state: RootState) => state.authenticationState?.isUserLoggedIn) || false;;
+    const isUserLoggedIn = useSelector((state: RootState) => state.authentication.isUserLoggedIn);
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         console.log(username);
         console.log(password);
-        dispatch<any>(authenticationActions.thunkLogIn({ 'email': username, 'password': password }));
-        /* isUserLoggedIn &&  */navigate("/catchAndRelease");
+        dispatch(authenticationActions.thunkLogIn({ 'email': username, 'password': password }));
+        isUserLoggedIn && navigate("/catchAndRelease");
 
     };
 
     const handleRegistration = (event: React.MouseEvent) => {
         event.preventDefault();
-        dispatch<any>(authenticationActions.thunkRegistration({ 'username': username, 'email': username, 'password': password }));
+        dispatch(authenticationActions.thunkRegistration({ 'username': username, 'email': username, 'password': password }));
     };
 
     return (

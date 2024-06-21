@@ -1,31 +1,19 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect } from "react";
 import Card, { Pokemon } from "../components/Card/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as pokemonActions } from "../store/actions/pokemons-actions";
+import { RootState, AppDispatch } from "store/store";
 import './Card/style.css';
-import { services } from "services/services";
-import { RootState } from "store/reducers/root-reducer";
-import axios from "axios";
-
 
 const CatchAndRealese: React.FC = () => {
 
-    const dispatch = useDispatch();
-    //const [loading, setLoading] = useState<boolean>(true);
-    const loading = useSelector((state: RootState) => state.pokemonsState?.isLoading) || false;
-    const pokemons = useSelector((state: RootState) => state.pokemonsState?.pokemons) || [] as Pokemon[];
+    const dispatch: AppDispatch = useDispatch();
+    const loading: boolean = useSelector((state: RootState) => state.pokemons.isLoading);
+    const pokemons: Pokemon[] = useSelector((state: RootState) => state.pokemons.pokemons);
 
     useEffect(() => {
-        dispatch<any>(pokemonActions.thunkInitPokemons());
-        /* setLoading(false); */
+        dispatch(pokemonActions.thunkInitPokemons());
     }, [dispatch]);
-    
-    if (loading) {
-        return <div>Loading...</div>;
-      }
-
-    console.log(pokemons);
 
     return (
         <>

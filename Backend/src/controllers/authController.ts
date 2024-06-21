@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User';
 
 const authController = {
-  async registerUser(req: Request, res: Response) {
+  registerUser: async (req: Request, res: Response) => {
     const { username, email, password } = req.body;
 
     try {
@@ -27,7 +27,7 @@ const authController = {
     }
   },
 
-  async loginUser(req: Request, res: Response) {
+  loginUser: async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
     try {

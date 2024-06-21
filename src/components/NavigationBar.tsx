@@ -1,19 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { RootState } from "store/reducers/root-reducer";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { RootState, AppDispatch } from "store/store";
 import { actionCreators as authenticationActions } from "../store/actions/authentication-actions";
 import logo from '../poke-logo.jpeg';
 
 const NavigationBar = () => {
     const location = useLocation();
     const isLoginPageActive = location.pathname === '/login';
-    const isUserLoggedIn = useSelector((state: RootState) => state.authenticationState?.isUserLoggedIn);
-    const dispatch = useDispatch();
+    const isUserLoggedIn = useSelector((state: RootState) => state.authentication.isUserLoggedIn);
+    const dispatch: AppDispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleLogOut = (event: React.MouseEvent) => {
         event.preventDefault();
-        dispatch<any>(authenticationActions.thunkLogOut());
+        dispatch(authenticationActions.thunkLogOut());
         navigate("/login");
     };
     <a className="navbar-brand poke-nav" href="#">
