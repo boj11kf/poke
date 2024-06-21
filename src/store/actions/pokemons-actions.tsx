@@ -54,7 +54,6 @@ export const actionCreators = {
             );
 
             pokemons.sort((a, b) => a.id > b.id ? 1 : -1);
-            console.log(pokemons);
             dispatch(actionCreators.InitPokemons(pokemons));
         } catch (error) {
             console.log(`error in thunkInitPokemons: ${error}`);
@@ -62,11 +61,11 @@ export const actionCreators = {
             dispatch(actionCreators.FinishLoading());
         }
     }),
-    thunkAddToMyPokemons: (payload: Pokemon) => (async (dispatch: any) => {
+    thunkAddToMyPokemons: (payload: Pokemon): ThunkAction<void, RootState, unknown, AnyAction> => (async (dispatch: any) => {
         console.log(`add ${payload.name} to my pokemons database`);
         dispatch(actionCreators.AddToMyPokemons(payload));
     }),
-    thunkRemoveFromMyPokemons: (payload: Pokemon) => (async (dispatch: any) => {
+    thunkRemoveFromMyPokemons: (payload: Pokemon): ThunkAction<void, RootState, unknown, AnyAction> => (async (dispatch: any) => {
         console.log(`remove ${payload.name} from my pokemons database`);
         dispatch(actionCreators.RemoveFromMyPokemons(payload));
     }),

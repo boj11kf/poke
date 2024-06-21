@@ -56,7 +56,6 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
     dispatch(pokemonActions.thunkAddToMyPokemons(currentPokemon));
   };
 
-  console.log(pokemons);
   return (
     <>
       <Modal
@@ -101,8 +100,8 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
               return null;
             }).map((item) => {
               return (
-                <div className={`item ${item.isMine && "is-already-mine"}`}  key={item.id}>
-                  <div className="card poke-card" onClick={() => openPokeInfo(item)}>
+                <div className={`item`}  key={item.id}>
+                  <div className={`card poke-card ${item.isMine && "is-already-mine"}`} onClick={() => openPokeInfo(item)}>
                     <img className="card-img-top card-img" src={item.sprites.front_default} alt="Card" />
                     <div className="card-body">
                       <h5 className="card-title poke-name">{item.name}</h5>
