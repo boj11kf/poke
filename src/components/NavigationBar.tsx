@@ -34,8 +34,8 @@ const NavigationBar = () => {
                 isUserLoggedIn &&
                 (
                     <>
-                        <Link to={"/catchAndRelease"}>CatchAndRelease</Link>
-                        <Link to={"/myPokemonList"}>MyPokemonList</Link>
+                        <Link to={"/pokemons"}>Pokemons</Link>
+                        <Link to={"/my-pokemons"}>My Pokemons</Link>
                     </>
                 )
             }

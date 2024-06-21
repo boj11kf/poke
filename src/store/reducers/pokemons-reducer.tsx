@@ -1,4 +1,4 @@
-import { Pokemon } from "components/Card/Card";
+import { Pokemon } from "components/Cards/Card-container";
 import { PokemonActions } from "../actions/pokemons-actions";
 import { Action, Reducer } from "redux";
 

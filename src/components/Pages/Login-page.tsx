@@ -1,13 +1,13 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as authenticationActions } from "../store/actions/authentication-actions";
-import '../App.css';
+import { actionCreators as authenticationActions } from "../../store/actions/authentication-actions";
+import '../../App.css';
 import { useNavigate } from "react-router-dom";
 import { RootState, AppDispatch } from "store/store";
 
 
 
-const Login = () => {
+const LoginPage = () => {
 
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -74,4 +74,4 @@ const Login = () => {
     )
 };
 
-export default Login;
+export default LoginPage;

@@ -1,6 +1,9 @@
 #root {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   width: 80%;
+  height: 99vh;
 }
 
 .logo {
@@ -9,9 +12,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -20,6 +25,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -43,6 +49,7 @@ body {
   height: 100%;
   display: flex;
   justify-content: center;
+  place-items: unset;
 }
 
 header {
@@ -63,6 +70,8 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  position: sticky;
+  top: 0;
 }
 
 .dropdown-menu {

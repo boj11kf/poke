@@ -1,12 +1,12 @@
 
-import Login from './components/Login'
-import { Route, Routes } from 'react-router-dom'
+import LoginPage from './components/Pages/Login-page';
+import { Route, Routes } from 'react-router-dom';
 import { lazy } from 'react';
 import NavigationBar from './components/NavigationBar';
-const HomePage = lazy(() => import('./components/Home-page'));
-const CatchAndRelease = lazy(() => import('./components/CatchAndRealese'));
-const MyPokemonList = lazy(() => import('./components/My-pokemon-list'));
-import './App.css'
+const HomePage = lazy(() => import('./components/Pages/Home-page'));
+const PokemonsPage = lazy(() => import('./components/Pages/Pokemons-page'));
+const MyPokemonPage = lazy(() => import('./components/Pages/My-pokemons-page'));
+import './App.css';
 
 
 const App = () => {
@@ -16,9 +16,9 @@ const App = () => {
       <NavigationBar />
       <Routes>
         <Route path={"/"} element={<HomePage />} />
-        <Route path={"/login"} element={<Login />} />
-        <Route path={"/catchAndRelease"} element={<CatchAndRelease />} />
-        <Route path={"/myPokemonList"} element={<MyPokemonList />} />
+        <Route path={"/login"} element={<LoginPage />} />
+        <Route path={"/pokemons"} element={<PokemonsPage />} />
+        <Route path={"/my-pokemons"} element={<MyPokemonPage />} />
       </Routes>
     </>
   )
