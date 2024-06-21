@@ -1,4 +1,4 @@
-import { Pokemon } from "components/Cards/Card-container";
+import { Pokemon } from "components/Cards/Card";
 import { PokeAPIResponse, services } from "../../services/services";
 import axios from "axios";
 import { AnyAction, ThunkAction} from "@reduxjs/toolkit";

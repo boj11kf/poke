@@ -16,7 +16,7 @@ const MyPokemonList = () => {
                     myPokemons.map((item) => {
                         return (
                             <div className={`item`} key={item.id}>
-                                <div className={`card poke-card`}>
+                                <div className={`card poke-card ${item.isMine && "is-already-mine"}`}>
                                     <img className="card-img-top card-img" src={item.sprites.front_default} alt="Card" />
                                     <div className="card-body">
                                         <h5 className="card-title poke-name">{item.name}</h5>

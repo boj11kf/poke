@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import CardsContainer, { Pokemon } from "../Cards/Cards-container";
 import { useSelector } from "react-redux";
 import { RootState, AppDispatch } from "store/store";
@@ -8,19 +8,26 @@ import '../Cards/style.css';
 
 const PokemonsPage: React.FC = () => {
 
-    const loading: boolean = useSelector((state: RootState) => state.pokemons.isLoading);
     const pokemons: Pokemon[] = useSelector((state: RootState) => state.pokemons.pokemons);
-    /* const [loading, setLoading] = useState<boolean>(false);
-    const [pokemons, setPokemons] = useState<Pokemon[]>({} as Pokemon[]); */
+    const [initialized, setInitialized] = useState(false);
 
     const dispatch: AppDispatch = useDispatch();
-
     useEffect(() => {
+        if (!initialized && pokemons.length === 0) {
+            dispatch(pokemonActions.thunkInitPokemons());
+            setInitialized(true);
+        }
+    }, [dispatch, initialized, pokemons.length]);
+
+
+    /* useEffect(() => {
         dispatch(pokemonActions.thunkInitPokemons());
-    }, []);
+    }, []); */
+
+    const memoizedPokemons = useMemo(() => pokemons, [pokemons]);
 
     return (
-        <CardsContainer pokemons={pokemons} loading={loading} />
+        <CardsContainer pokemons={memoizedPokemons} />
     );
 };
 

@@ -27,7 +27,7 @@ export const reducer: Reducer<PokemonsState> = (
             newState = { ...state, pokemons: action.payload };
             break;
         case "pokemons/add_to_my_pokemons":
-            newState = { ...state, pokemons: [...state.pokemons, { ...action.payload, isMine: true }] };
+            newState = { ...state, pokemons: state.pokemons.map(pokemon => pokemon.id === action.payload.id ? { ...action.payload, isMine: true } : pokemon)};
             break;
         case "pokemons/remove_from_my_pokemons":
             const newMyPokemons = state.pokemons
