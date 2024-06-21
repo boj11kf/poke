@@ -1,12 +1,9 @@
-import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import React, { useCallback, useState } from "react";
 import { Loading } from "../Loading";
-import { useDispatch } from "react-redux";
-import { actionCreators as pokemonActions } from "../../store/actions/pokemons-actions";
-import { AppDispatch } from "store/store";
-import './style.css';
 import { Card } from "./Card";
-import { PokeModal } from "./Poke-modal";
+import { v4 as uuidv4 } from 'uuid'; /* uuIdv4() amiatt kell, mert a Strict mode miatt 2x renderel, igy kellet egy strongId */
+import './style.css';
+
 
 export interface Pokemon {
   id: number;
@@ -30,36 +27,10 @@ const CardsContainer: React.FC<CardsContainerProps> = (props: CardsContainerProp
   
   const { pokemons, loading } = props;
   const [searchInput, setSearchInput] = useState<string>('');
-  const [showModal, setShow] = useState<boolean>(false);
-  const [chosenPokemon, setChosenPokemon] = useState<Pokemon>({} as Pokemon);
-  const handleClose = () => setShow(false);
-  const handleShow = (pokemon: Pokemon) => {
-    setChosenPokemon(pokemon);
-    setShow(true);
-  };
-  const dispatch: AppDispatch = useDispatch();
 
-  const handleRelease = (event: React.MouseEvent, pokemon: Pokemon) => {
-    event.preventDefault();
-    dispatch(pokemonActions.thunkRemoveFromMyPokemons(pokemon));
-  };
-
-  const handleCatch = (event: React.MouseEvent, pokemon: Pokemon) => {
-    event.preventDefault();
-    dispatch(pokemonActions.thunkAddToMyPokemons(pokemon));
-  };
-
+  
   return (
-    <>
-      {
-        showModal &&
-        <PokeModal
-          showModal={showModal}
-          pokemon={chosenPokemon}
-          handleRelease={handleRelease}
-          handleCatch={handleCatch}
-          handleClose={handleClose} />
-      }
+    <div className="container">
       <form className="form-inline my-2 my-lg-0">
         <input
           className="form-control mr-sm-2"
@@ -78,21 +49,19 @@ const CardsContainer: React.FC<CardsContainerProps> = (props: CardsContainerProp
                 .filter((pokemon) => pokemon.name.toLowerCase().includes(searchInput.toLocaleLowerCase()))
                 .map((pokemon) => (
                   <Card
-                    key={pokemon.id}
+                    key={`${pokemon.id}-${uuidv4()}`}
                     pokemon={pokemon}
-                    handleShow={handleShow}
                   />
                 ))
               : pokemons.map((pokemon) => (
                 <Card
-                  key={pokemon.id}
+                  key={`${pokemon.id}-${uuidv4()}`}
                   pokemon={pokemon}
-                  handleShow={handleShow}
                 />
               ))
         }
       </div>
-    </>
+    </div>
   );
 }
 

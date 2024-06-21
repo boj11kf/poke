@@ -1,26 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CardsContainer, { Pokemon } from "../Cards/Cards-container";
-import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as pokemonActions } from "../../store/actions/pokemons-actions";
+import { useSelector } from "react-redux";
 import { RootState, AppDispatch } from "store/store";
+import { actionCreators as pokemonActions } from "../../store/actions/pokemons-actions";
+import { useDispatch } from "react-redux";
 import '../Cards/style.css';
 
 const PokemonsPage: React.FC = () => {
 
-    const dispatch: AppDispatch = useDispatch();
     const loading: boolean = useSelector((state: RootState) => state.pokemons.isLoading);
     const pokemons: Pokemon[] = useSelector((state: RootState) => state.pokemons.pokemons);
+    /* const [loading, setLoading] = useState<boolean>(false);
+    const [pokemons, setPokemons] = useState<Pokemon[]>({} as Pokemon[]); */
+
+    const dispatch: AppDispatch = useDispatch();
 
     useEffect(() => {
         dispatch(pokemonActions.thunkInitPokemons());
-    }, [dispatch]);
+    }, []);
 
     return (
-        <>
-            <div className="container">
-                <CardsContainer pokemons={pokemons} loading={loading} />
-            </div>
-        </>
+        <CardsContainer pokemons={pokemons} loading={loading} />
     );
 };
 

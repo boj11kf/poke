@@ -1,44 +1,50 @@
 
 import { Button, Modal } from "react-bootstrap";
-import { CardProps } from "./Card";
 import { useEffect, useState } from "react";
 import { Pokemon } from "./Cards-container";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as pokemonActions } from "../../store/actions/pokemons-actions";
+import { AppDispatch, RootState } from "store/store";
+import { useParams } from "react-router-dom";
+import './style.css';
 
-interface PokeModalProps {
-    pokemon: Pokemon;
-    showModal: boolean;
-    handleRelease: (event: React.MouseEvent, pokemon: Pokemon) => void;
-    handleCatch: (event: React.MouseEvent, pokemon: Pokemon) => void;
-    handleClose: () => void;
-};
+const PokeModal: React.FC = () => {
 
-export const PokeModal: React.FC<PokeModalProps> = (props: PokeModalProps) => {
-    
-    const { pokemon, showModal, handleCatch, handleRelease, handleClose } = props;
-    const [id, setId] = useState<string>('');
     const [pokeName, setPokeName] = useState<string>('');
     const [pokeHeight, setPokeHeight] = useState<string>('');
     const [pokeWeight, setPokeWeight] = useState<string>('');
     const [pokeImg, setPokeImg] = useState<string>('');
+    const { id } = useParams<"id">();
+    const pokemon: Pokemon = useSelector((state: RootState) => state.pokemons.pokemons).find(p => p.id === parseInt(id || "0")) || {} as Pokemon;
 
-    
     useEffect(() => {
-        setId(pokemon.id.toString());
         setPokeName(pokemon.name);
         setPokeHeight(pokemon.height?.toString());
         setPokeWeight(pokemon.weight?.toString());
         setPokeImg(pokemon.sprites.front_default);
-    }, []);
-    
+    }, [id]);
+
+    const dispatch: AppDispatch = useDispatch();
+
+    const handleCatch = (event: React.MouseEvent, pokemon: Pokemon) => {
+        event.preventDefault();
+        dispatch(pokemonActions.thunkAddToMyPokemons(pokemon));
+    };
+
+    const handleRelease = (event: React.MouseEvent, pokemon: Pokemon) => {
+        event.preventDefault();
+        dispatch(pokemonActions.thunkRemoveFromMyPokemons(pokemon));
+    };
+
     return (
         <Modal
-            show={showModal}
-            onHide={handleClose}
+            show={true}
             aria-labelledby="contained-modal-title-vcenter"
             centered
             className={`chosen-poke-modal`}
         >
-            <Modal.Header closeButton>
+            <Button className="btn close-button" variant="danger" onClick={() => window.history.back()}>X</Button>
+            <Modal.Header>
                 <Modal.Title>{pokeName}</Modal.Title>
             </Modal.Header>
             <Modal.Body className="poke-content">
@@ -54,3 +60,5 @@ export const PokeModal: React.FC<PokeModalProps> = (props: PokeModalProps) => {
     );
 
 };
+
+export default PokeModal;

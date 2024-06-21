@@ -5,10 +5,6 @@
     font-weight: bold;
 }
 
-.card-img {
-    height: 200px;
-}
-
 .grid-container {
     margin-top: 30px;
     overflow: auto;
@@ -31,11 +27,19 @@
     border-radius: 8px;
     border: 1px solid #B1B2BE;
     cursor: pointer;
+    margin: 10px;
 }
 
 .chosen-poke-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: absolute;
-    left: 100px;
+    border: solid 2px black;
+    border-radius: 15px;
+    padding: 30px;
+    background-color: gray;
+    top: 20%;
 }
 
 .poke-card:hover {
@@ -56,7 +60,6 @@
 
 .poke-content {
     text-align: center !important;
-    font-weight: bold;
 }
 
 .img-height {
@@ -94,6 +97,19 @@
 
 .modal-header {
     text-align: center;
+}
+.modal-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.close-button {
+    float: right;
 }
 
 .is-already-mine {
