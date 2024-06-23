@@ -50,8 +50,6 @@ export default App
 
 // Mock function to check if the user is logged in
 const isLoggedIn = (): boolean => {
-  // Implement your logic to check if the user is logged in
-  // For example, checking a token in localStorage
   return !!localStorage.getItem('token');
 };
 
@@ -62,7 +60,6 @@ interface RequireAuthProps {
 // Component to protect routes that require authentication
 const RequireAuth: React.FC<RequireAuthProps> = ({ children }) => {
   if (!isLoggedIn()) {
-    // User is not logged in, redirect to login page
     return <Navigate to="/login" replace />;
   }
   return <>{children}</>;

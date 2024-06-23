@@ -24,19 +24,11 @@ interface RemoveFromMyPokemonsAction {
     type: typeof REMOVE_FROM_MY_POKEMONS;
     payload: Pokemon;
 }
-interface StartLoadingAction {
-    type: typeof START_LOADING;
-}
-interface FinishLoadingAction {
-    type: typeof FINISH_LOADING;
-}
 
 export type PokemonActions
     = InitPokemonsAction
     | AddToMyPokemonsAction
-    | RemoveFromMyPokemonsAction
-    | StartLoadingAction
-    | FinishLoadingAction;
+    | RemoveFromMyPokemonsAction;
 
 
 
@@ -83,11 +75,5 @@ export const actionCreators = {
     RemoveFromMyPokemons: (pokemon: Pokemon): RemoveFromMyPokemonsAction => ({
         type: REMOVE_FROM_MY_POKEMONS,
         payload: pokemon,
-    }),
-    StartLoading: (): StartLoadingAction => ({
-        type: START_LOADING,
-    }),
-    FinishLoading: (): FinishLoadingAction => ({
-        type: FINISH_LOADING,
     }),
 }

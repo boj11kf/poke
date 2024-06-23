@@ -5,12 +5,11 @@ import { Action, Reducer } from "redux";
 
 export interface PokemonsState {
     pokemons: Pokemon[];
-    isLoading: boolean;
 }
 
 const initialState: PokemonsState = {
     pokemons: [],
-    isLoading: true,
+
 }
 
 type KnownActions = PokemonActions;
@@ -41,12 +40,6 @@ export const reducer: Reducer<PokemonsState> = (
                         ? { ...action.payload, isMine: false }
                         : pokemon)
             };
-            break;
-        case "pokemons/start_loading":
-            newState = { ...state, isLoading: true };
-            break;
-        case "pokemons/finish_loading":
-            newState = { ...state, isLoading: false };
             break;
         default: break;
     }
