@@ -1,4 +1,4 @@
-import { Pokemon } from "components/Cards/Card-container";
+import { Pokemon } from "../../components/Cards/Cards-container";
 import { PokemonActions } from "../actions/pokemons-actions";
 import { Action, Reducer } from "redux";
 
@@ -27,15 +27,20 @@ export const reducer: Reducer<PokemonsState> = (
             newState = { ...state, pokemons: action.payload };
             break;
         case "pokemons/add_to_my_pokemons":
-            newState = { ...state, pokemons: state.pokemons.map(pokemon => pokemon.id === action.payload.id ? { ...action.payload, isMine: true } : pokemon)};
+            newState = {
+                ...state, pokemons: state.pokemons
+                    .map(pokemon => pokemon.id === action.payload.id
+                        ? { ...action.payload, isMine: true }
+                        : pokemon)
+            };
             break;
         case "pokemons/remove_from_my_pokemons":
-            const newMyPokemons = state.pokemons
-                .filter(pokemon =>
-                    pokemon.id === action.payload.id
+            newState = {
+                ...state, pokemons: state.pokemons
+                    .map(pokemon => pokemon.id === action.payload.id
                         ? { ...action.payload, isMine: false }
-                        : pokemon);
-            newState = { ...state, pokemons: newMyPokemons };
+                        : pokemon)
+            };
             break;
         case "pokemons/start_loading":
             newState = { ...state, isLoading: true };

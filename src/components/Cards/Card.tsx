@@ -1,8 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { Pokemon } from './Cards-container';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store/store';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './style.css';
 
