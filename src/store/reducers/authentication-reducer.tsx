@@ -6,8 +6,9 @@ export interface AuthenticationState {
     isUserLoggedIn: boolean;
 }
 
+/* refreshnel igy aszerint inicializal, hogy bejelentkeztunk-e mar */
 const initialState: AuthenticationState = {
-    isUserLoggedIn: false,
+    isUserLoggedIn: !!localStorage.getItem("token"),
 }
 
 type KnownActions = AuthenticationActions;
