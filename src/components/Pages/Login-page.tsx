@@ -1,9 +1,9 @@
 import { useState } from "react"
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { actionCreators as authenticationActions } from "../../store/actions/authentication-actions";
 import '../../App.css';
 import { useNavigate } from "react-router-dom";
-import { RootState, AppDispatch } from "store/store";
+import { AppDispatch } from "store/store";
 
 
 
@@ -13,14 +13,13 @@ const LoginPage = () => {
     const [password, setPassword] = useState<string>('');
     const dispatch: AppDispatch = useDispatch();
     const navigate = useNavigate();
-    const isUserLoggedIn = useSelector((state: RootState) => state.authentication.isUserLoggedIn);
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         console.log(username);
         console.log(password);
         dispatch(authenticationActions.thunkLogIn({ 'email': username, 'password': password }));
-        isUserLoggedIn && navigate("/catchAndRelease");
+        navigate("/pokemons");
 
     };
 
