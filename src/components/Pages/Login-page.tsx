@@ -1,9 +1,10 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { actionCreators as authenticationActions } from "../../store/actions/authentication-actions";
-import '../../App.css';
 import { useNavigate } from "react-router-dom";
 import { AppDispatch } from "store/store";
+import { useLoading } from "../Loading";
+import '../../App.css';
 
 
 
@@ -13,19 +14,24 @@ const LoginPage = () => {
     const [password, setPassword] = useState<string>('');
     const dispatch: AppDispatch = useDispatch();
     const navigate = useNavigate();
+    const { setLoading } = useLoading();
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        console.log(username);
-        console.log(password);
-        dispatch(authenticationActions.thunkLogIn({ 'email': username, 'password': password }));
+        setLoading(true);
+        await dispatch(authenticationActions.thunkLogIn({ 'email': username, 'password': password }));
         navigate("/pokemons");
+        //setLoading(false);
 
     };
 
-    const handleRegistration = (event: React.MouseEvent) => {
+    const handleRegistration = async (event: React.MouseEvent) => {
         event.preventDefault();
-        dispatch(authenticationActions.thunkRegistration({ 'username': username, 'email': username, 'password': password }));
+        setLoading(true);
+        await dispatch(authenticationActions.thunkRegistration({ 'username': username, 'email': username, 'password': password }));
+        /* itt meg meg kell oldani, h tudja  felhasznalo h sikeresen regisztralt, es most be is kell jelentkeznie */
+        navigate("/login");
+        //setLoading(false);
     };
 
     return (

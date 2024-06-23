@@ -38,7 +38,6 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
         setIsMine(pokemon.isMine);
       }, [pokemon.isMine]);
 
-    console.log(isMine);
 
     return (
         <>

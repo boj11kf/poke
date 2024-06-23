@@ -9,9 +9,5 @@ export const rootReducer = combineReducers({
 });
 
 
-  
-  /* store.dispatch<any>(pokemonActions.thunkInitPokemons()); */
-
-
 
 

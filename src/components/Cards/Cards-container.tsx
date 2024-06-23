@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Loading } from "../Loading";
+import React from "react";
 import { Card } from "./Card";
 import './style.css';
 

@@ -44,7 +44,7 @@ export const actionCreators = {
 
     /***** THUNK ACTIONS *****/
     thunkInitPokemons: (): ThunkAction<void, RootState, unknown, AnyAction> => (async (dispatch: any) => {
-        dispatch(actionCreators.StartLoading());
+      
         try {
             const res = await axios.get<PokeAPIResponse>('https://pokeapi.co/api/v2/pokemon/');
             const results = await Promise.all(res.data.results.map(item => axios.get(item.url)));
@@ -57,9 +57,9 @@ export const actionCreators = {
             dispatch(actionCreators.InitPokemons(pokemons));
         } catch (error) {
             console.log(`error in thunkInitPokemons: ${error}`);
-        } finally {
-            dispatch(actionCreators.FinishLoading());
-        }
+        }/* finally {
+            
+        } */
     }),
     thunkAddToMyPokemons: (payload: Pokemon): ThunkAction<void, RootState, unknown, AnyAction> => (async (dispatch: any) => {
         console.log(`add ${payload.name} to my pokemons database`);
