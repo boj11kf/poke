@@ -1,7 +1,7 @@
 
 import LoginPage from './components/Pages/Login-page';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { lazy } from 'react';
+import { lazy, useState } from 'react';
 const HomePage = lazy(() => import('./components/Pages/Home-page'));
 const PokemonsPage = lazy(() => import('./components/Pages/Pokemons-page'));
 const MyPokemonPage = lazy(() => import('./components/Pages/My-pokemons-page'));
@@ -14,14 +14,20 @@ import './App.css';
 const App = () => {
   const location = useLocation();
   const background = location.state && location.state.background;
+  const [searchInput, setSearchInput] = useState<string>('');
+
+  const handleSearchInputChange = (value: string) => {
+    setSearchInput(value);
+  };
+
 
   return (
     <>
       <Routes location={background || location}>
-        <Route path={"/"} element={<Layout />} errorElement={<ErrorPage message={"Page Not Found"} />}>
+        <Route path={"/"} element={<Layout handleSearchInputChange={handleSearchInputChange}/>} errorElement={<ErrorPage message={"Page Not Found"} />}>
           <Route index path={"/"} element={<HomePage />} />
           <Route path={"/login"} element={<LoginPage />} />
-          <Route path={"/pokemons"} element={<PokemonsPage />} />
+          <Route path={"/pokemons"} element={<PokemonsPage searchInput={searchInput}/>} />
           <Route path={"/my-pokemons"} element={<MyPokemonPage />} />
         </Route>
       </Routes>

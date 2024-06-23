@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CardsContainer, { Pokemon } from "../Cards/Cards-container";
 import { useSelector } from "react-redux";
 import { RootState, AppDispatch } from "store/store";
@@ -6,12 +6,19 @@ import { actionCreators as pokemonActions } from "../../store/actions/pokemons-a
 import { useDispatch } from "react-redux";
 import '../Cards/style.css';
 
-const PokemonsPage: React.FC = () => {
+interface PokemonsPageProps {
+    searchInput: string;
+}
+
+const PokemonsPage: React.FC<PokemonsPageProps> = (props: PokemonsPageProps) => {
+
+    const { searchInput } = props;
 
     const pokemons: Pokemon[] = useSelector((state: RootState) => state.pokemons.pokemons);
     const [initialized, setInitialized] = useState(false);
 
     const dispatch: AppDispatch = useDispatch();
+    
     useEffect(() => {
         if (!initialized && pokemons.length === 0) {
             dispatch(pokemonActions.thunkInitPokemons());
@@ -19,15 +26,8 @@ const PokemonsPage: React.FC = () => {
         }
     }, [dispatch, initialized, pokemons.length]);
 
-
-    /* useEffect(() => {
-        dispatch(pokemonActions.thunkInitPokemons());
-    }, []); */
-
-    const memoizedPokemons = useMemo(() => pokemons, [pokemons]);
-
     return (
-        <CardsContainer pokemons={memoizedPokemons} />
+        <CardsContainer pokemons={pokemons} searchInput={searchInput}/>
     );
 };
 

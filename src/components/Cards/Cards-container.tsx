@@ -19,29 +19,26 @@ export interface Pokemon {
 
 interface CardsContainerProps {
   pokemons: Pokemon[];
+  searchInput: string;
 }
 
 const CardsContainer: React.FC<CardsContainerProps> = (props: CardsContainerProps) => {
 
-  const { pokemons } = props;
-  const [searchInput, setSearchInput] = useState<string>('');
+  const { pokemons, searchInput } = props;
 
   return (
     <div className="container">
-      <form className="form-inline my-2 my-lg-0">
-        <input
-          className="form-control mr-sm-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-          onChange={event => setSearchInput(event.target.value)} />
-        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
       <div className="grid-container">
         {
-          pokemons.map((pokemon) => (
+          pokemons.filter((pokemon) => {
+            if (searchInput == "") {
+              return pokemon
+            } else if (pokemon.name.toLowerCase().includes(searchInput.toLowerCase())) {
+              return pokemon
+            }
+          }).map((pokemon) => (
             <Card
-              key={pokemon.id} // Assuming pokemon.id is unique and stable
+              key={pokemon.id}
               pokemon={pokemon}
             />
           ))

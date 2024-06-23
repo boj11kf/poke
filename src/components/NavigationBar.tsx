@@ -2,9 +2,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { RootState, AppDispatch } from "store/store";
 import { actionCreators as authenticationActions } from "../store/actions/authentication-actions";
+import { SearchBar, SearchBarProps } from "./SearchBar";
 import logo from '../poke-logo.jpeg';
 
-const NavigationBar = () => {
+export interface NavigationBarProps extends SearchBarProps {
+    
+}
+
+const NavigationBar: React.FC<NavigationBarProps> = (props: NavigationBarProps) => {
+
+    const { handleSearchInputChange } = props;
+
     const location = useLocation();
     const isLoginPageActive = location.pathname === '/login';
     const isUserLoggedIn = useSelector((state: RootState) => state.authentication.isUserLoggedIn);
@@ -16,10 +24,7 @@ const NavigationBar = () => {
         dispatch(authenticationActions.thunkLogOut());
         navigate("/login");
     };
-    <a className="navbar-brand poke-nav" href="#">
-
-    </a>
-
+ 
     return (
         <nav>
             <Link to={"/"}>
@@ -36,6 +41,7 @@ const NavigationBar = () => {
                     <>
                         <Link to={"/pokemons"}>Pokemons</Link>
                         <Link to={"/my-pokemons"}>My Pokemons</Link>
+                        <SearchBar handleSearchInputChange={handleSearchInputChange}/>
                     </>
                 )
             }

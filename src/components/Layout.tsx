@@ -1,10 +1,17 @@
 import { Outlet } from "react-router-dom";
-import NavigationBar from './NavigationBar'
+import NavigationBar, { NavigationBarProps } from './NavigationBar'
 
-const Layout = () => {
+interface LayoutProps extends NavigationBarProps {
+
+}
+
+const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
+
+    const { handleSearchInputChange } = props;
+
     return (
         <div className="site-wrapper">
-            <NavigationBar />
+            <NavigationBar handleSearchInputChange={handleSearchInputChange} />
             <main>
                 <Outlet />
             </main>
