@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Pokemon } from "components/Cards/Card-container";
+import { Pokemon } from "../components/Cards/Cards-container";
 
 export interface PokeAPIResponse {
     next: string | null;
