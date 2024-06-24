@@ -10,6 +10,8 @@ const MyPokemonList = () => {
         = useSelector((state: RootState) => state.pokemons.pokemons)
             .filter(pokemon => pokemon.isMine);
 
+            console.log(myPokemons);
+
     return (
         <div className="container">
             <div className="grid-container">
