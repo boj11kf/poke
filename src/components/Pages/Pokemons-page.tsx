@@ -1,34 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import CardsContainer, { Pokemon } from "../Cards/Cards-container";
-import { useSelector } from "react-redux";
-import { RootState, AppDispatch } from "store/store";
-import { actionCreators as pokemonActions } from "../../store/actions/pokemons-actions";
-import { useDispatch } from "react-redux";
-import { useLoading } from "../Loader/PokeBallLoader";
 import '../Cards/style.css';
 
-interface PokemonsPageProps {
+export interface PokemonsPageProps {
     searchInput: string;
+    pokemons: Pokemon[];
 }
 
 const PokemonsPage: React.FC<PokemonsPageProps> = (props: PokemonsPageProps) => {
 
-    const { searchInput } = props;
-    const { setLoading } = useLoading();
-
-    const pokemons: Pokemon[] = useSelector((state: RootState) => state.pokemons.pokemons);
-    const [initialized, setInitialized] = useState(false);
-
-    const dispatch: AppDispatch = useDispatch();
-    
-    useEffect(() => {
-        setLoading(true);
-        if (!initialized && pokemons.length === 0) {
-            dispatch(pokemonActions.thunkInitPokemons());
-            setInitialized(true);
-        }
-        //setLoading(false);
-    }, [dispatch, initialized, pokemons.length]);
+    const {pokemons,  searchInput } = props;
 
     return (
         <CardsContainer pokemons={pokemons} searchInput={searchInput}/>
