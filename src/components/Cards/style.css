@@ -5,6 +5,12 @@
     font-weight: bold;
 }
 
+.card-img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}
+
 .grid-container {
     margin-top: 30px;
     overflow: auto;
@@ -30,17 +36,6 @@
     margin: 10px;
 }
 
-.chosen-poke-modal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    border: solid 2px black;
-    border-radius: 15px;
-    padding: 30px;
-    background-color: gray;
-    top: 20%;
-}
 
 .poke-card:hover {
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.25), 0 0px 0px rgba(0, 0, 0, 0.22);
@@ -95,12 +90,16 @@
     margin-top: 15px;
 }
 
-.modal-header {
-    text-align: center;
+.modal-dialog {
+    justify-content: center;
 }
 .modal-title {
     font-size: 24px;
     font-weight: bold;
+}
+
+.modal-content {
+    display: unset
 }
 
 .modal-footer {
@@ -109,7 +108,8 @@
 }
 
 .close-button {
-    float: right;
+    position: absolute;
+    right: 0;
 }
 
 .is-already-mine {

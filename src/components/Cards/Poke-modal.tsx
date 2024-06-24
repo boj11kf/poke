@@ -41,7 +41,6 @@ const PokeModal: React.FC = () => {
             show={true}
             aria-labelledby="contained-modal-title-vcenter"
             centered
-            className={`chosen-poke-modal`}
         >
             <Button className="btn close-button" variant="danger" onClick={() => window.history.back()}>X</Button>
             <Modal.Header>
