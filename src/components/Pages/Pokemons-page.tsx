@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState, AppDispatch } from "store/store";
 import { actionCreators as pokemonActions } from "../../store/actions/pokemons-actions";
 import { useDispatch } from "react-redux";
-import { useLoading } from "../Loading";
+import { useLoading } from "../Loader/PokeBallLoader";
 import '../Cards/style.css';
 
 interface PokemonsPageProps {
