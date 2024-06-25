@@ -6,7 +6,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background: linear-gradient(#F9BC61, #FDE8C9);
 }
 
 .card {
@@ -23,10 +22,8 @@
     height: 300px;
     width: 250px;
     padding: 0;
-    /* background: linear-gradient(#F9BC61, #FDE8C9); */
     box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
-    //box-shadow: 0 0 15px rgba(0,0,0,0.1);
     transition: transform 1s;
     transform-style: preserve-3d;
 }
