@@ -26,7 +26,7 @@ const CardsContainer: React.FC<CardsContainerProps> = (props: CardsContainerProp
   const { pokemons, searchInput } = props;
 
   return (
-    <div className="container">
+   
       <div className="grid-container">
         {
           pokemons.filter((pokemon) => {
@@ -43,7 +43,7 @@ const CardsContainer: React.FC<CardsContainerProps> = (props: CardsContainerProp
           ))
         }
       </div>
-    </div>
+    
   );
 
 }
