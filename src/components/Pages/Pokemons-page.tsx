@@ -1,6 +1,6 @@
 import React from "react";
 import CardsContainer, { Pokemon } from "../Cards/Cards-container";
-import '../Cards/style.css';
+import '../Cards/style.scss';
 
 export interface PokemonsPageProps {
     searchInput: string;

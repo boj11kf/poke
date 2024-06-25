@@ -55,8 +55,8 @@ const App = () => {
       {
         background &&
         <Routes>
-          <Route path={"/pokemons/pokemon/:id"} element={<RequireAuth><PokeModal /></RequireAuth>} />
-          <Route path={"/my-pokemons/pokemon/:id"} element={<RequireAuth><PokeModal /></RequireAuth>} />
+          {/* <Route path={"/pokemons/pokemon/:id"} element={<RequireAuth><PokeModal /></RequireAuth>} />
+          <Route path={"/my-pokemons/pokemon/:id"} element={<RequireAuth><PokeModal /></RequireAuth>} /> */}
           {/* Catch-all route for unmatched paths */}
           <Route path="*" element={<ErrorPage message={"Page Not Found"} />} />
         </Routes>

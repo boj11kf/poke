@@ -39,7 +39,7 @@ interface LoadingContextType {
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     /* Ez csak mert tul gyorsan töltött, alig lehetett latni, 
-    a megfelelö mukodeshet a komponensekben meg kell hivni a setLoading(false)-t */
+    a megfelelö mukodeshez a komponensekben meg kell hivni a setLoading(false)-t */
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false);

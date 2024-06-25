@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as pokemonActions } from "../../store/actions/pokemons-actions";
 import { AppDispatch, RootState } from "store/store";
 import { useParams } from "react-router-dom";
-import './style.css';
+import './style.scss';
 
 const PokeModal: React.FC = () => {
 
