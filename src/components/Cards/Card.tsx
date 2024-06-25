@@ -125,15 +125,15 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
                     </div>
                     <div className="bottom">
                         <div>
-                            <p>Hue</p>
+                            <p>Hp</p>
                             <p>36</p>
                         </div>
                         <div>
-                            <p>Sat</p>
+                            <p>Att</p>
                             <p>93</p>
                         </div>
                         <div>
-                            <p>Lum</p>
+                            <p>Def</p>
                             <p>68</p>
                         </div>
                     </div>
