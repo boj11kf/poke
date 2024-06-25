@@ -115,7 +115,10 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
                     </div>
                     <div className="middle" /* style={{background: `${getCardColor(mainType)}`}}*/ >
                         <div>
-                            <p>#F9BC61</p>
+                            {
+                                pokemon.isMine ? <p>Already yours</p> : <p> </p>
+                            }
+                            
                             <p>{pokeName}</p>
                         </div>
                         <img src={pokeImg} />
