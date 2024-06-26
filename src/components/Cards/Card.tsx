@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { Pokemon } from './Cards-container';
+import { Pokemon } from '../../types';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AppDispatch } from 'store/store';
 import { useDispatch } from 'react-redux';
@@ -25,6 +25,7 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
     const [hp, setHp] = useState<string>('');
     const [attack, setAttack] = useState<string>('');
     const [defense, setDefense] = useState<string>('');
+    const [abilities, setAbilities] = useState<string[]>(['']);
     const [type, setType] = useState<string>('');
     const [mainType, setMainType] = useState<string>('');
     const [isMine, setIsMine] = useState<boolean>(pokemon.isMine);
@@ -87,7 +88,7 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
         setPokeImg(pokemon.sprites.front_default);
         setMainType(pokemon.types[0].type.name);
         setType(pokemon.types[0].type.name + (pokemon.types[1]?.type.name !== undefined ? ' / ' + pokemon.types[1]?.type.name : ''));
-
+        
     }, []);
 
     useEffect(() => {

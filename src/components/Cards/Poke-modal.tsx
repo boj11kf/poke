@@ -1,7 +1,7 @@
 
 import { Button, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { Pokemon } from "./Cards-container";
+import { Pokemon } from '../../types';
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as pokemonActions } from "../../store/actions/pokemons-actions";
 import { AppDispatch, RootState } from "store/store";

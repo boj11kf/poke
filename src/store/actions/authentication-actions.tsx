@@ -1,4 +1,5 @@
 import { services } from "../../services/services";
+import { actionCreators as pokemonActions } from "./pokemons-actions";
 
 
 const USER_LOG_IN = 'user/user-log-in';
@@ -22,12 +23,13 @@ export const actionCreators = {
     /***** THUNK ACTIONS *****/
     thunkLogIn: (payload: any) => (async (dispatch: any) => {
         try {
-            const response = await services.postData('http://localhost:3000/api/auth/login', payload);
+            const response = await services.post('http://localhost:3000/api/auth/login', payload);
             const text = await response.text();
 
             localStorage.setItem("token", String(text));
 
-            dispatch(actionCreators.logIn());
+            await dispatch(actionCreators.logIn());
+            await dispatch(pokemonActions.thunkInitPokemons());
         } catch (error) {
             console.error(error);
         }
@@ -44,7 +46,7 @@ export const actionCreators = {
     }),
     thunkRegistration: (payload: any) => (async (dispatch: any) => {
         try {
-            const response = await services.postData('http://localhost:3000/api/auth/register', payload)
+            const response = await services.post('http://localhost:3000/api/auth/register', payload)
             const text = await response.text();
 
             dispatch(actionCreators.registration());

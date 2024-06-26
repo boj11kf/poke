@@ -1,28 +1,13 @@
-import axios from "axios";
-import { Pokemon } from "../components/Cards/Cards-container";
+import axios, { AxiosResponse } from "axios";
+import { Pokemon } from '../types';
 
 export interface PokeAPIResponse {
-    next: string | null;
-    previous: string | null;
-    results: Pokemon[];
+    [string: string]: any;
 }
 
 export const services = {
 
-    pokeFunc: async () => {
-        return await axios.get<PokeAPIResponse>("https://pokeapi.co/api/v2/pokemon/");
-    },
-
-    getPokemonData: async (results: Pokemon[]) => {
-        return await Promise.all(
-            results.map(async (item) => {
-                const result = await axios.get<Pokemon>(item.url);
-                return result.data;
-            })
-        );
-    },
-
-    getData: async (url:string) => {
+    get: async (url:string) => {
         try {
             const authToken = localStorage.getItem('token');
             //if (!authToken) { throw new Error("Authentication token not found.");}
@@ -41,7 +26,7 @@ export const services = {
         }
     },
 
-    postData: async (url:string, payload:any) => {
+    post: async (url:string, payload:any) => {
         try {
             const authToken = localStorage.getItem('token');
             //if (!authToken) { throw new Error("Authentication token not found.");}
@@ -62,7 +47,7 @@ export const services = {
         }
     },
 
-    putData: async (url:string, payload:any) => {
+    put: async (url:string, payload:any) => {
         try {
             const authToken = localStorage.getItem('token');
             //if (!authToken) { throw new Error("Authentication token not found.");}
@@ -83,7 +68,7 @@ export const services = {
         }
     },
 
-    deleteData: async (url:string, payload:any) => {
+    delete: async (url:string, payload:any) => {
         try {
             const authToken = localStorage.getItem('token');
             //if (!authToken) { throw new Error("Authentication token not found.");}
@@ -103,6 +88,18 @@ export const services = {
             throw new Error(`Error in deleteData: ${error}`);
         }
     }
+};
+
+export const pokemonServices = {
+    
+    get: async (url: string) => {
+        return await axios.get<PokeAPIResponse>(url);
+    },
+
+    getPokemonData: async (results: Pokemon[]): Promise<AxiosResponse<any>[]> => {
+        const promises = results.map(item => axios.get(item.url));
+        return await Promise.all(promises);
+    },
 };
 
 const getErrorMessage = async (url: string, response: Response) => {

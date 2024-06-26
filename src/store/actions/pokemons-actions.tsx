@@ -1,7 +1,6 @@
-import { Pokemon } from "../../components/Cards/Cards-container";
-import { PokeAPIResponse } from "../../services/services";
-import axios from "axios";
-import { Action, ThunkAction} from "@reduxjs/toolkit";
+import { Pokemon } from '../../types';
+import { PokeAPIResponse, pokemonServices } from "../../services/services";
+import { Action, ThunkAction } from "@reduxjs/toolkit";
 import { RootState } from "store/store";
 
 
@@ -34,10 +33,10 @@ export const actionCreators = {
 
     /***** THUNK ACTIONS *****/
     thunkInitPokemons: (): ThunkAction<void, RootState, unknown, Action> => (async (dispatch: any) => {
-      
+
         try {
-            const res = await axios.get<PokeAPIResponse>('https://pokeapi.co/api/v2/pokemon/');
-            const results = await Promise.all(res.data.results.map(item => axios.get(item.url)));
+            const res = await pokemonServices.get('https://pokeapi.co/api/v2/pokemon/');
+            const results = await pokemonServices.getPokemonData(res.data.results);
 
             const pokemons = results.map(result => result.data).filter((pokemon, index, self) =>
                 index === self.findIndex((p) => p.id === pokemon.id)
